@@ -1155,9 +1155,9 @@
       .lr-grid {
         display: grid;
         gap: 18px;
-        padding: 22px 24px;
+        padding: 22px 2em;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        max-width: 1680px;
+        max-width: 1024px;
         margin: 0 auto;
       }
       @media (max-width: 1280px) {
@@ -1168,7 +1168,7 @@
       @media (max-width: 720px) {
         .lr-grid {
           grid-template-columns: 1fr;
-          padding: 16px;
+          padding: 16px 2em;
         }
       }
 
