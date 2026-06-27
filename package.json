@@ -1,0 +1,14 @@
+{
+  "name": "librus-clean-dashboard",
+  "version": "1.0.0",
+  "description": "Userscript: czysty pulpit dla portalu LIBRUS Rodzina",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write \"*.{js,json,md}\"",
+    "format:check": "prettier --check \"*.{js,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
+}

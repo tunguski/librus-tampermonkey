@@ -3,12 +3,12 @@
 Userscript, który zastępuje interfejs portalu **LIBRUS Rodzina** prostym, czytelnym
 pulpitem z czterema panelami:
 
-| Panel | Źródło danych |
-|-------|---------------|
-| **Oceny i zachowanie** | `/Grades`, `/BehaviourGrades`, `/Subjects` |
-| **Plan lekcji i terminarz** | `/Timetables`, `/HomeWorks` |
-| **Wiadomości** | `/Messages` |
-| **Zadania domowe** | `/HomeWorkAssignments` (fallback: `/HomeWorks`) |
+| Panel                       | Źródło danych                                   |
+| --------------------------- | ----------------------------------------------- |
+| **Oceny i zachowanie**      | `/Grades`, `/BehaviourGrades`, `/Subjects`      |
+| **Plan lekcji i terminarz** | `/Timetables`, `/HomeWorks`                     |
+| **Wiadomości**              | `/Messages`                                     |
+| **Zadania domowe**          | `/HomeWorkAssignments` (fallback: `/HomeWorks`) |
 
 Czysty, jasny/ciemny motyw (podąża za ustawieniem systemu), responsywna siatka
 4 → 2 → 1 kolumny, brak zbędnych elementów.
@@ -29,8 +29,8 @@ Czysty, jasny/ciemny motyw (podąża za ustawieniem systemu), responsywna siatka
    (Chrome / Edge / Firefox).
 2. Otwórz plik [`librus-clean-dashboard.user.js`](./librus-clean-dashboard.user.js)
    — Tampermonkey wykryje nagłówek `// ==UserScript==` i zaproponuje instalację.
-   (Albo: Dashboard → *Utwórz nowy skrypt* → wklej zawartość → zapisz.)
-3. Zaloguj się na **<https://portal.librus.pl/rodzina>** swoim *Kontem LIBRUS*.
+   (Albo: Dashboard → _Utwórz nowy skrypt_ → wklej zawartość → zapisz.)
+3. Zaloguj się na **<https://portal.librus.pl/rodzina>** swoim _Kontem LIBRUS_.
 4. Wejdź na pulpit rodziny — zobaczysz nowy, czysty widok.
 
 ## Jak to działa
@@ -38,11 +38,11 @@ Czysty, jasny/ciemny motyw (podąża za ustawieniem systemu), responsywna siatka
 Przepływ uwierzytelnienia (zweryfikowany na podstawie projektu
 [`andrewkoltsov/librus-sdk`](https://github.com/andrewkoltsov/librus-sdk)):
 
-1. **`GET portal.librus.pl/api/v3/SynergiaAccounts`** — wywołanie *same-origin*,
+1. **`GET portal.librus.pl/api/v3/SynergiaAccounts`** — wywołanie _same-origin_,
    korzysta z Twojej istniejącej sesji (cookie) portalu. Zwraca listę powiązanych
    dzieci, a **każde** ma własny `accessToken`.
 2. **`GET api.librus.pl/3.0/<zasób>`** z nagłówkiem
-   `Authorization: Bearer <accessToken>` — to wywołanie jest *cross-origin*, więc
+   `Authorization: Bearer <accessToken>` — to wywołanie jest _cross-origin_, więc
    wykonywane jest przez `GM_xmlhttpRequest` (stąd `@connect api.librus.pl`
    i uprawnienie `GM_xmlhttpRequest`).
 
@@ -83,4 +83,17 @@ informację zamiast się wywalić.
 ```
 librus-clean-dashboard.user.js   # cały userscript (UI + warstwa danych + style)
 README.md
+package.json                     # skrypty narzędziowe (formatowanie)
+.prettierrc.json                 # konfiguracja Prettiera (szerokość linii 80)
+```
+
+## Formatowanie
+
+Kod trzyma szerokość **80 znaków** (Prettier). Blok CSS w skrypcie jest oznaczony
+znacznikiem szablonu ``css`…` ``, dzięki czemu Prettier formatuje również style.
+
+```bash
+npm install        # jednorazowo — instaluje Prettiera
+npm run format       # formatuje *.js, *.json, *.md w miejscu
+npm run format:check # tylko sprawdza (np. w CI), bez zmian
 ```
